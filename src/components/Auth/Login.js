@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LoginImg from "../../assests/auth-img.jpg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -52,7 +53,7 @@ const Login = () => {
           <div className="no-login flex gap-5">
             <h4 className="text-gray-400">Don't have an account?</h4>
             <button className="bg-gray-700 hover:bg-gray-500 font-semibold text-gray-300 h-8 w-19 rounded">
-              Sign up
+              <Link to={"/users"}>Sign up</Link>
             </button>
           </div>
         </div>
