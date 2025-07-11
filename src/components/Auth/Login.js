@@ -1,4 +1,5 @@
 import React from "react";
+import LoginImg from "../../assests/login-pic.jpg"
 
 const Login = () => {
   return (
@@ -37,7 +38,7 @@ const Login = () => {
             <span>Welcome to</span> student portal
           </h1>
           <h4 className="text-gray-400">Login to access your account</h4>
-          <img />
+          <img src={LoginImg} className=" w-full object-cover "/>
         </div>
       </div>
     </div>
