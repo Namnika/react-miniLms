@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginImg from "../../assests/login-portal-img.jpg";
+import LoginImg from "../../assests/auth-img.jpg";
 
 const Login = () => {
 
