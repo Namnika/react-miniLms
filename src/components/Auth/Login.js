@@ -3,29 +3,31 @@ import LoginImg from "../../assests/login-portal-img.jpg";
 
 const Login = () => {
   return (
-    <div className="grid min-h-screen grid-cols-2 h-full w-full content-center items-center">
+    <div className="grid min-h-screen grid-cols-2 h-full w-full">
       <div className="login-wrapper bg-gray-950 py-5 text-white">
-        <div className=" ml-15">
-          <div className="login-heading">
+        <div className=" m-15">
+          <div className="login-heading py-3">
             <h2 className="font-bold text-5xl">Login</h2>
+            <br/>
             <h4 className="text-gray-400">Enter your account details</h4>
           </div>
           <div className="login-inputs my-6 gap-3 flex flex-col">
             <input
-              className="placeholder:text-gray-500"
+              className="placeholder:text-gray-500 p-3 border-b"
               type="email"
               name="email"
               required
               placeholder="Email"
             />
             <input
+            className="placeholder:text-gray-500 p-3 border-b"
               type="password"
               name="password"
               required
               placeholder="Password"
             />
             <div>
-              <button className="w-full bg-violet-500 h-8 rounded" type="submit">Login</button>
+              <button className="w-full bg-violet-500 h-8 my-3 rounded" type="submit">Login</button>
             </div>
           </div>
           <div className="no-login flex gap-5">
@@ -36,7 +38,7 @@ const Login = () => {
       </div>
       <div className="portal w-full h-full bg-white right-column bg-white">
         <div className="portal-heading">
-          <img src={LoginImg} className=" w-full object-cover " />
+          <img src={LoginImg} className=" w-full h-full object-cover " />
         </div>
       </div>
     </div>
