@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginImg from "../../assests/login-portal-img.jpg";
 
 const Login = () => {
+
+    const [showPassword, setShowPassword ] = useState(false)
   return (
     <div className="grid min-h-screen grid-cols-2 h-full w-full">
       <div className="login-wrapper bg-gray-950 py-5 text-white">
