@@ -8,13 +8,12 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Cross Origin Resource Sharing
+app.use(cors(corsOptions));
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
-app.use(credentials);
-
-// Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+// app.use(credentials);
 
 // built-in middleware to handle urlencode form data
 app.use(express.urlencoded({ extended: false }));
@@ -39,5 +38,5 @@ app.use("/", userRoutes);
 
 // connecting node with mongodb
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => { console.log('Connected to MongoDB'), app.listen(PORT, () => console.log(`Server is running on port: ${PORT}!`)); })
+  .then(() => { console.log('Connected to MongoDB'), app.listen(process.env.PORT, () => console.log(`Server is running on port: ${PORT}!`)); })
   .catch(err => console.error('MongoDB connection error:', err));
