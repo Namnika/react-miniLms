@@ -4,22 +4,22 @@ const jwt = require('jsonwebtoken')
 
 exports.signup = async (req, res) => {
 	try {
-		const { email, password, role } = req.body;
+		const { email, name, password, role } = req.body;
 
-		if (!email || !password || !role) {
+		if (!email || !name || !password || !role) {
 			return res.status(400).json({ message: 'Email, password, and role are required.' });
 		}
 		const existingUser = await User.findOne({ email });
 		if (existingUser) return res.status(409).json({ message: 'User already exists.' });
 
 		const hashedPassword = await bcrypt.hash(password, 10);
-		const newUser = new User({ email, password: hashedPassword, role });
+		const newUser = new User({ email, name, password: hashedPassword, role });
 
 		await newUser.save();
 
 		res.status(201).json({ message: 'User created successfully.' });
 
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json({ message: 'Server error.', error: err.message });
 	}
 }
@@ -27,14 +27,17 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
 	try {
 		// get user's credentials from clientside
-		const { email, password } = req.query;
+		const { email, password } = req.body;
 
 		const user = await User.findOne({ email });
 		if (!user) return res.status(401).json({ message: 'Invalid email or password.' });
 
 		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) return res.status(401).json({ message: 'Invalid email or password.' });
-        
+
+		//login as owner
+
+
 		// generate jwt token
 		const token = jwt.sign(
 			{ userId: user._id, role: user.role },
@@ -42,17 +45,32 @@ exports.login = async (req, res) => {
 			{ expiresIn: '1h' }
 		);
 
-		const redirectUrl = user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard';
+		console.log('Generated JWT token:', token);
+
+		// const redirectUrl = user.role === 'admin' && user.role === 'owner'? '/admin/dashboard' : '/student/dashboard';
+		
+		// redirecting user as per the role
+		let redirectUrl = '/student/dashboard';
+
+		if(user.role === 'admin' ){
+			redirectUrl = '/admin/dashboard'
+		}else if(user.role === 'owner'){
+			redirectUrl = '/'
+		}
 
 		res.status(200).json({
 			message: 'Login successful.',
 			token,
-			role: user.role,
+			user: {
+				id: user._id,
+				email: user.email,
+				role: user.role,
+			},
 			redirect: redirectUrl
 		});
 
 
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json({ message: 'Server error.', error: err.message });
 	}
 }
