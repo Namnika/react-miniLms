@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
 	try {
 		// get user's credentials from clientside
-		const { email, password } = req.body;
+		const { email, password, isAdminLogin } = req.body;
 
 		const user = await User.findOne({ email });
 		if (!user) return res.status(401).json({ message: 'Invalid email or password.' });
@@ -35,8 +35,10 @@ exports.login = async (req, res) => {
 		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) return res.status(401).json({ message: 'Invalid email or password.' });
 
-		//login as owner
-
+		// If "Login as Admin" is checked, but user is not admin/owner, deny access
+		if (isAdminLogin && user.role !== 'admin' && user.role !== 'owner') {
+			return res.status(403).json({ message: 'Access denied. Not an admin or owner.' });
+		}
 
 		// generate jwt token
 		const token = jwt.sign(
@@ -48,13 +50,13 @@ exports.login = async (req, res) => {
 		console.log('Generated JWT token:', token);
 
 		// const redirectUrl = user.role === 'admin' && user.role === 'owner'? '/admin/dashboard' : '/student/dashboard';
-		
-		// redirecting user as per the role
+
+		// redirecting user as per the role ['student', 'owner', 'admin']
 		let redirectUrl = '/student/dashboard';
 
-		if(user.role === 'admin' ){
+		if (user.role === 'admin') {
 			redirectUrl = '/admin/dashboard'
-		}else if(user.role === 'owner'){
+		} else if (user.role === 'owner') {
 			redirectUrl = '/'
 		}
 
@@ -63,6 +65,7 @@ exports.login = async (req, res) => {
 			token,
 			user: {
 				id: user._id,
+				name: user.name,
 				email: user.email,
 				role: user.role,
 			},
