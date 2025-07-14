@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Auth/Login';
-import AdminDashboard from './components/Admin/AdminDashboard';
-import './index.css';
-import Signup from './components/Auth/Signup';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import "./index.css";
+import Signup from "./components/Auth/Signup";
+import StudentDashboard from "./components/Student/StudentDashboard";
 
 // const PrivateRoute = ({ children, role }) => {
 //   const token = localStorage.getItem('token');
@@ -21,26 +21,26 @@ import Signup from './components/Auth/Signup';
 
 // export default PrivateRoute;
 // eslint-disable-next-line no-lone-blocks
-{/* <Route
-  path="/admin/dashboard"
-  element={
-    <PrivateRoute role="admin">
-      <AdminDashboard />
-    </PrivateRoute>
-  }
-/> */}
-
-
-
+{
+  /* */
+}
 
 function App() {
   return (
     <Router>
       <Routes>
-      <Route path='/users' element={<Signup />}/>
-      <Route path='/login/users' element={<Login />}/>
-        
-        <Route path='/student/dashboard' element={<AdminDashboard />} />
+        <Route path="/users" element={<Signup />} />
+        <Route path="/login/users" element={<Login />} />
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {/* <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateRoute role="admin">
+              <AdminDashboard />
+            </PrivateRoute>
+          }
+        /> */}
       </Routes>
     </Router>
   );
