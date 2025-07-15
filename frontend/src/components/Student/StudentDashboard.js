@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CourseImg from "../../assests/course-image.jpg";
 
 function StudentDashboard() {
+  const [progress, setProgress] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    if (progress === 100) {
+      setIsCompleted(true);
+    } else {
+      setIsCompleted(false); // Reset if progress goes below 100
+    }
+  }, [progress]);
+
   return (
     <div className="bg-violet-100/50 ">
       <div className="w-xl pl-18 py-12 m-auto">
@@ -77,13 +88,16 @@ function StudentDashboard() {
               </p>
 
               <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                <div
-                  class="bg-violet-600 text-xs font-medium text-violet-100 text-center p-0.5 leading-none rounded-full"
-                  style={{ width: "45%" }}
-                >
-                  {" "}
-                  45%
-                </div>
+                {!isCompleted && 
+                <button disabled={!isCompleted} onClick={() => alert('Progress completed!')}>
+                  <div
+                    class="bg-violet-600 text-xs font-medium text-violet-100 text-center p-0.5 leading-none rounded-full"
+                    style={{ width: "45%" }}
+                  >
+                    {" "}
+                    100%
+                  </div>
+                </button>}
               </div>
 
               <button className="  border border-violet-500  hover:bg-violet-100 h-8 my-3 rounded text-violet-500 font-semibold">
