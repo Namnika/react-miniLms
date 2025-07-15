@@ -117,7 +117,7 @@ const Signup = () => {
           <div className="no-signup flex gap-5">
             <h4 className="text-gray-400">Already have an account?</h4>
             <button className="bg-gray-700 hover:bg-gray-500 font-semibold text-gray-300 h-8 w-19 rounded">
-              <Link to={"/users/params"}>Login</Link>
+              <Link to={"/login/users"}>Login</Link>
             </button>
           </div>
         </div>
