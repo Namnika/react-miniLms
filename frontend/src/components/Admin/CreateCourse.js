@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
-function CreateCourse() {
-  const [value, setValue] = useState("");
+function CreateCourse({value, setValue}) {
+  
   return (
     <div>
       <div id="course-edit" className="my-8">

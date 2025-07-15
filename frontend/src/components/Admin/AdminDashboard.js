@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.snow.css";
 import { Link } from "react-router-dom";
-import CourseImg from "../../assests/course-image.jpg"
+import CourseImg from "../../assests/course-image.jpg";
+import CreateCourse from "./CreateCourse";
 
 const AdminDashboard = () => {
   const [value, setValue] = useState("");
-
   return (
     <div className="bg-violet-100/50 ">
       <div className="w-xl pl-18 py-12 m-auto">
@@ -64,51 +62,14 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <div id="course-edit" className="my-8">
-          <div className="flex mb-7 flex-row ">
-            <label
-              for="small-input"
-              className=" mb-2 w-xs  text-gray-900 dark:text-white"
-            >
-              <strong>Course Name:</strong>
-            </label>
-            <input
-              type="text"
-              id="small-input"
-              className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* react quill editor */}
-          <div>
-            <ReactQuill
-              className="bg-gray-50"
-              theme="snow"
-              value={value}
-              onChange={setValue}
-            />
-            {/* Optional: Display the raw HTML output */}
-            <div style={{ marginTop: "20px" }}>
-              <strong>Course Content:</strong>
-              <div dangerouslySetInnerHTML={{ __html: value }} />
-            </div>
-          </div>
-        </div>
-        <div id="all-courses" className="course-button">
-          <button className="w-full bg-violet-500 hover:bg-violet-400 h-8 my-3 rounded text-white font-semibold uppercase">
-            Create Course
-          </button>
-        </div>
+        <CreateCourse value={value} setValue={setValue} />
 
         {/* View all courses */}
         <div>
           <h2 className="text-xl font-bold my-5"> View All Courses</h2>
           <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-              <img
-                className="rounded-t-lg"
-                src={CourseImg}
-                alt=""
-              />
+              <img className="rounded-t-lg" src={CourseImg} alt="" />
             </a>
             <div className="p-5">
               <a href="#">
