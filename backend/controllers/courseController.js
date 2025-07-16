@@ -1,4 +1,5 @@
 const Courses = require('../models/Courses')
+const striptags = require('striptags');
 
 exports.courseCreate = async (req, res) => {
 	try {
