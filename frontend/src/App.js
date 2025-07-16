@@ -4,6 +4,7 @@ import AdminDashboard from "./components/Admin/AdminDashboard";
 import "./index.css";
 import Signup from "./components/Auth/Signup";
 import StudentDashboard from "./components/Student/StudentDashboard";
+import CourseView from "./components/Student/CourseView";
 
 // const PrivateRoute = ({ children, role }) => {
 //   const token = localStorage.getItem('token');
@@ -32,7 +33,9 @@ function App() {
         <Route path="/users" element={<Signup />} />
         <Route path="/login/users" element={<Login />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/student/courses/course-view" element={<CourseView />}/>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        
         {/* <Route
           path="/admin/dashboard"
           element={
