@@ -15,7 +15,7 @@ function CourseView() {
         <div class=" fixed w-full top-0 start-0 ">
           <header className="bg-gray-950 text-white">
             <div class="max-w-screen-xl flex flex-row  items-center justify-center mx-8 p-15">
-              <a href="#">
+              <a href={`${course.id}`} onClick={(e) => e.preventDefault()} className="cursor-pointer">
                 <span class="self-center text-base font-semibold whitespace-nowrap ">
                   Course View
                 </span>
