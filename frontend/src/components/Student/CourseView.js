@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function CourseView() {
+
+  const {state} = useLocation()
+  const course = state?.course
+
+  if (!course) return <p>Course not found</p>; // fallback
+
   return (
     <div className="bg-violet-100/50 h-screen">
       <div className="w-xl pl-18 py-12 m-auto">
@@ -18,7 +25,7 @@ function CourseView() {
                 id="navbar-sticky"
               >
                 <h2 className="text-2xl font-semibold ">
-                  Noteworthy technology acquisitions 2021
+                  {course.title}
                 </h2>
               </div>
               <a href="#"><Link to={"/student/dashboard"}>
@@ -29,8 +36,7 @@ function CourseView() {
             </div>
           </header>
           <p className="m-auto p-10 w-xl font-normal text-left text-gray-700 ">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
+            {course.content}
           </p>
 
           <div id="all-courses" className="course-button text-center">
