@@ -5,11 +5,11 @@ function CourseView() {
   return (
     <div className="bg-violet-100/50 h-screen">
       <div className="w-xl pl-18 py-12 m-auto">
-        <div class=" fixed w-full top-0 start-0 border-b border-gray-200">
+        <div class=" fixed w-full top-0 start-0 ">
           <header className="bg-gray-950 text-white">
             <div class="max-w-screen-xl flex flex-row  items-center justify-center mx-8 p-15">
               <a href="#">
-                <span class="self-center text-base font-semibold whitespace-nowrap dark:text-white">
+                <span class="self-center text-base font-semibold whitespace-nowrap ">
                   Course View
                 </span>
               </a>
@@ -22,13 +22,13 @@ function CourseView() {
                 </h2>
               </div>
               <a href="#"><Link to={"/student/dashboard"}>
-                <span class="self-center text-base font-semibold whitespace-nowrap dark:text-white">
+                <span class="self-center text-base font-semibold whitespace-nowrap ">
                   All Courses
                 </span></Link>
               </a>
             </div>
           </header>
-          <p className="m-auto py-10 w-xl font-normal text-gray-700 dark:text-gray-400">
+          <p className="m-auto p-10 w-xl font-normal text-left text-gray-700 ">
             Here are the biggest enterprise technology acquisitions of 2021 so
             far, in reverse chronological order.
           </p>
