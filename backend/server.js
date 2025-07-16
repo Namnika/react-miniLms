@@ -2,6 +2,7 @@ require("dotenv").config({ quiet: true });
 const cors = require("cors");
 const express = require('express');
 const userRoutes = require('./routes/userRoutes')
+const courseRoutes = require('./routes/courseRoutes')
 const credentials = require("./middleware/authMiddleware");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
@@ -34,6 +35,7 @@ app.get("/logout", (req, res) => {
 
 // routes
 app.use("/", userRoutes);
+app.use("/courses", courseRoutes)
 
 
 // connecting node with mongodb
