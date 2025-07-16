@@ -30,7 +30,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/users" element={<Signup />} />
         <Route path="/login/users" element={<Login />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student/courses/course-view" element={<CourseView />}/>
@@ -41,6 +40,7 @@ function App() {
           element={
             <PrivateRoute role="admin">
               <AdminDashboard />
+              <SignUp/> // superadmin 
             </PrivateRoute>
           }
         /> */}
