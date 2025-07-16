@@ -18,3 +18,13 @@ exports.courseCreate = async (req, res) => {
 		res.status(500).json({ message: "Server Error: ", error: error.message })
 	}
 }
+
+// In courseController.js
+exports.getAllCourses = async (req, res) => {
+	try {
+		const courses = await Courses.find().sort({ createdAt: -1 });
+		res.status(200).json({ courses });
+	} catch (error) {
+		res.status(500).json({ message: "Failed to fetch courses", error: error.message });
+	}
+};
