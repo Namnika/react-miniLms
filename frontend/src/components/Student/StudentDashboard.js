@@ -165,7 +165,7 @@ function StudentDashboard() {
                     </div>
 
                     <button className="  border border-violet-500  hover:bg-violet-100 h-8 my-3 rounded text-violet-500 font-semibold">
-                      <Link to={"/student/courses/course-view"} className="inline-flex items-center px-3 py-2 text-sm text-center font-medium ">
+                      <Link to={`/student/courses/${course.id}`} state={{ course }} className="inline-flex items-center px-3 py-2 text-sm text-center font-medium ">
 
                         Read more
                         <svg
