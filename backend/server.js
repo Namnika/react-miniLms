@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require('express');
 const userRoutes = require('./routes/userRoutes')
 const courseRoutes = require('./routes/courseRoutes')
+const progressRoutes = require('./routes/progressRoutes')
 const credentials = require("./middleware/authMiddleware");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
@@ -36,6 +37,7 @@ app.get("/logout", (req, res) => {
 // routes
 app.use("/", userRoutes);
 app.use("/courses", courseRoutes)
+app.use('/progress', progressRoutes);
 
 
 // connecting node with mongodb
