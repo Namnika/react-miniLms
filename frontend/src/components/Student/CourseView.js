@@ -11,7 +11,7 @@ function CourseView() {
 
   if (!course) return <p>Course not found</p>; // fallback
 
-  const userId = "68725d72247c1d34534c2251";
+  const userId = "68725d72247c1d34534c2251"; // use authcontext
 
   const handleComplete = async () => {
     try {
