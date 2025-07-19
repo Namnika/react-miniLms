@@ -3,8 +3,13 @@ import CourseImg from "../../assests/course-image.jpg";
 import CreateCourse from "./CreateCourse";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import {useAuth} from "../../context/AuthContext"
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+
+  const navigate = useNavigate()
+  const {logout} = useAuth()
 
   const [courseForm, setCourseForm] = useState({
     title: '',
@@ -71,15 +76,35 @@ const AdminDashboard = () => {
     fetchCourses();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:5000/logout", { withCredentials: true });
+
+      logout(); // Clear local context and localStorage
+
+      toast.success("Logged out successfully");
+      navigate("/login/users");
+    } catch (error) {
+      toast.error("Logout failed");
+      console.error("Logout error:", error);
+    }
+  };
+
 
   return (
     <><div><Toaster /></div>
       <div className="bg-violet-100/50 ">
         <div className="w-3xl pl-20 py-12 m-auto">
-          <h2 className="text-2xl font-bold text-violet-500">
-            {" "}
-            Admin Dashboard{" "}
-          </h2>
+          <div className="flex justify-around">
+            <h2 className="grow-1 text-2xl font-bold text-violet-500">
+              {" "}
+              Admin Dashboard{" "}
+            </h2>
+
+            <button onClick={handleLogout} className="cursor-pointer">
+              <h3 className="text-base text-rose-600 font-medium ">Logout</h3>
+            </button>
+          </div>
 
           <aside
             id="sidebar-multi-level-sidebar"

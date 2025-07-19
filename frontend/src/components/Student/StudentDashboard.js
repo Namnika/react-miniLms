@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import CourseImg from "../../assests/course-image.jpg";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext"
+import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
+	const { logout } = useAuth()
+	const navigate = useNavigate()
 	const [view, setView] = useState("all"); // "all" or "completed"
 	const [allCourses, setAllCourses] = useState([])
 
@@ -59,15 +64,34 @@ function StudentDashboard() {
 		return true; // "all"
 	});
 
+	const handleLogout = async () => {
+		try {
+			await axios.get("http://localhost:5000/logout", { withCredentials: true });
+
+			logout(); // Clear local context and localStorage
+
+			toast.success("Logged out successfully");
+			navigate("/login/users");
+		} catch (error) {
+			toast.error("Logout failed");
+			console.error("Logout error:", error);
+		}
+	};
+
 
 	return (
-		<>
+		<><div><Toaster /></div>
 			<div className="bg-violet-100/50">
 				<div className="w-3xl pl-20 py-12 mx-auto">
-					<h2 className="text-2xl font-bold text-violet-500">
-						{" "}
-						Student Dashboard{" "}
-					</h2>
+					<div className="flex justify-around">
+						<h2 className="grow-1 text-2xl font-bold text-violet-500">
+							{" "}
+							Student Dashboard{" "}
+						</h2>
+
+						<button onClick={handleLogout} className="cursor-pointer">
+							<h3 className="text-base text-rose-600 font-medium ">Logout</h3>
+						</button></div>
 
 					<aside
 						id="sidebar-multi-level-sidebar"
