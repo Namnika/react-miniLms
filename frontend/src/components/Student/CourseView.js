@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -7,7 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 function CourseView() {
   const { state } = useLocation();
   const course = state?.course;
-  const setProgress = state?.setProgress;
 
   if (!course) return <p>Course not found</p>; // fallback
 
@@ -21,14 +20,12 @@ function CourseView() {
         courseId: course._id,
       });
 
-      // 2. Update progress in UI
-      if (setProgress === 50) setProgress(100);
-
       // Optional: show toast or success message
       setTimeout(() => {
         console.log("Course marked as completed");
         toast.success("Course marked as completed");
-      }, 2000);
+      }, 1000);
+
     } catch (error) {
       console.error("Error marking course as completed", error);
       toast.error(`Error marking course as completed ${error}`);
