@@ -139,7 +139,7 @@ const AdminDashboard = () => {
               {allCourses.map((course) => {
 
 
-                return (<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm ">
+                return (<div key={course._id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm ">
                   <a href="#something">
                     <img className="rounded-t-lg" src={CourseImg} alt="" />
                   </a>
@@ -167,9 +167,9 @@ const AdminDashboard = () => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M1 5h12m0 0L9 1m4 4L9 9"
                           />
                         </svg>
