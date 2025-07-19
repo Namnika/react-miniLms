@@ -23,21 +23,25 @@ app.use(express.urlencoded({ extended: false }));
 // built-in middleware for json
 app.use(express.json());
 
-
-// logout user and clear its token
-app.get("/logout", (req, res) => {
-  req.logout(err => {
-    if (err) return res.status(500).send('Logout failed');
-    res.clearCookie('connect.sid'); // Clear session cookie
-    res.status(200).json({ message: "Logged out successfully." });
-    res.redirect('/users');
-  });
-});
-
 // routes
 app.use("/", userRoutes);
 app.use("/courses", courseRoutes)
 app.use('/progress', progressRoutes);
+// logout user and clear its token
+app.get("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).json({ message: "Logout failed." });
+      } else {
+        res.clearCookie('connect.sid');
+        return res.status(200).json({ message: "Logged out successfully." });
+      }
+    });
+  } else {
+    return res.status(200).json({ message: "No active session." });
+  }
+});
 
 
 // connecting node with mongodb
