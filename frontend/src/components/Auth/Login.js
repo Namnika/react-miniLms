@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +13,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false); // for showing loading state
+  const {login} = useAuth()
 
 
   const handleChange = (e) => {
@@ -37,7 +39,7 @@ const Login = () => {
 
       // // 2. Store token and user in localStorage
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      login(user)
 
       if (user.role === "admin") {
         toast.success(`Hi ${user.name}, Welcome to platform!`);
@@ -54,7 +56,7 @@ const Login = () => {
         if (user.role === "admin") {
           navigate("/admin/dashboard");
         } else if (user.role === "owner") {
-          navigate('/')
+          navigate('/admin/dashboard')
         } else {
           navigate("/student/dashboard");
         }
