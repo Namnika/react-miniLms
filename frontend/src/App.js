@@ -41,14 +41,23 @@ export const ProtectedRoute = ({ children, role }) => {
   return user ? children : null;
 }
 
-export const SuperAdminRoute = ({ children }) => {
-  const { user } = useAuth()
+export const SuperAdminRoute = ({ children, role }) => {
+  const { user, authLoading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user) { navigate("/login/users") }
-    if (user == null) {<p>No Access to unauthorized user!</p>}
-  }, [user, navigate])
+    if (!authLoading) {
+      if (!user) { navigate("/login/users") }
+      else if (role) {
+        const allowedRoles = Array.isArray(role) ? role : [role];
+        if (!allowedRoles.includes(user.role)) {
+          navigate("/login/users");
+        }
+      }
+    }
+
+
+  }, [user, navigate, authLoading, role])
 
   return children
 }
@@ -78,7 +87,7 @@ function App() {
           } />
 
           <Route path="/users" element={
-            <SuperAdminRoute role="owner">
+            <SuperAdminRoute role={["admin", "owner"]}>
               <Signup />
             </SuperAdminRoute>
           } />
